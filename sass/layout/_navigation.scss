@@ -1,0 +1,229 @@
+.navigation {
+
+    &__checkbox {
+        display: none;
+    }
+
+    &__button {
+        background-color: $color-white;
+        height: 7rem;
+        width: 7rem;
+        position: fixed;
+        top: 6rem;
+        right: 6rem;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        z-index: 3000;
+        box-shadow: 0 1rem 3rem rgba($color-black, .1);
+        text-align: center;
+        cursor: pointer;
+
+        @include respond(tab-port) {
+            top: 4rem;
+            right: 4rem;
+        }
+
+        @include respond(phone) {
+            top: 3rem;
+            right: 3rem;
+        }
+}
+
+    &__background {
+        height: 6rem;
+        width: 6rem;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        position: fixed;
+        top: 6.5rem;
+        right: 6.5rem;
+        background-image: radial-gradient($color-primary-light, $color-primary-dark);
+        // radial gradient goes from the middle to the outside.. opposed to linear which goes from the beginning
+        z-index: 1000;
+        //transform: scale(80);
+        //-webkit-transform: scale(80);
+        //-moz-transform: scale(80);
+        //-ms-transform: scale(80);
+        //-o-transform: scale(80);
+        transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+        -webkit-transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+        -moz-transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+        -ms-transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+        -o-transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+        // cubic-bezier.com
+
+        @include respond(tab-port) {
+            top: 4.5rem;
+            right: 4.5rem;
+        }
+
+        @include respond(phone) {
+            top: 3.5rem;
+            right: 3.5rem;
+        }
+}
+
+    &__nav {
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 2000;
+        opacity: 0;
+        width: 0;
+        // we put width: 0; to remove the invisible links nav that we almost* removed with opacity: 0;
+        transition: all .8s;
+        -webkit-transition: all .8s;
+        -moz-transition: all .8s;
+        -ms-transition: all .8s;
+        -o-transition: all .8s;
+        transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+        -webkit-transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+        -moz-transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+        -ms-transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+        -o-transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+    &__list {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%)    ;
+        -webkit-transform: translate(-50%, -50%)    ;
+        -moz-transform: translate(-50%, -50%)    ;
+        -ms-transform: translate(-50%, -50%)    ;
+        -o-transform: translate(-50%, -50%)    ;
+        list-style: none;
+        text-align: center;
+        width: 100%;
+}
+
+    &__item {
+        margin: 1rem;
+    }
+
+    &__link {
+        &:link,
+        &:visited {
+        display: inline-block;
+        font-size: 3rem;
+        font-weight: 300;
+        padding: 1rem 2rem;
+        color: $color-white;
+        text-decoration: none;
+        text-transform: uppercase;
+        background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%);
+        background-size: 220%;
+        transition: all .4s ;
+        -webkit-transition: all .4s ;
+        -moz-transition: all .4s ;
+        -ms-transition: all .4s ;
+        -o-transition: all .4s ;
+
+        span {
+            margin-right: 1.5rem;
+            display: inline-block;
+        }
+}
+
+        &:hover,
+        &:active {
+            background-position: 100%;
+            color: $color-primary;
+            transform: translateX(1rem);
+            -webkit-transform: translateX(1rem);
+            -moz-transform: translateX(1rem);
+            -ms-transform: translateX(1rem);
+            -o-transform: translateX(1rem);
+        }
+        
+    }
+
+    // "~" general sibling.. when we hit checkbox (which becomes checked) 
+    // we open backcground into transfrom scale(80)
+    &__checkbox:checked ~ &__background{
+        transform: scale(80);
+        -webkit-transform: scale(80);
+        -moz-transform: scale(80);
+        -ms-transform: scale(80);
+        -o-transform: scale(80);
+}
+    // functionality
+    &__checkbox:checked ~ &__nav {
+        opacity: 1;
+        width: 100%;
+        // we bring back opacity and width from the nav class
+    }
+
+    // Icon (x - element)
+    &__icon {
+        position: relative;
+        margin-top: 3.5rem;
+        
+        
+
+        &,
+        &::before,
+        &::after {
+            width: 3rem;
+            height: 2px;
+            background-color: $color-grey-dark-3;
+            display: inline-block;
+            
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            transition: all .2s;
+            -webkit-transition: all .2s;
+            -moz-transition: all .2s;
+            -ms-transition: all .2s;
+            -o-transition: all .2s;
+}
+
+        &::before { top: -.8rem; } 
+        &::after { top: .8rem }
+    }
+
+    &__button:hover &__icon::before {
+        top: -1rem;
+    }
+    &__button:hover &__icon::after {
+        top: 1rem;
+    }
+    
+
+    &__checkbox:checked + &__button &__icon {
+        background-color: transparent;
+    } // + is an adjacent sibling selector
+
+    &__checkbox:checked + &__button &__icon::before {
+        top: 0;
+        transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
+        -moz-transform: rotate(135deg);
+        -ms-transform: rotate(135deg);
+        -o-transform: rotate(135deg);
+}
+
+    &__checkbox:checked + &__button &__icon::after {
+        top: 0;
+        //we use top 0 because the lines are spaced out to the one in the middle
+        transform:rotate(-135deg);
+        -webkit-transform:rotate(-135deg);
+        -moz-transform:rotate(-135deg);
+        -ms-transform:rotate(-135deg);
+        -o-transform:rotate(-135deg);
+}
+    
+
+}
